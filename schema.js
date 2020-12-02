@@ -21,6 +21,7 @@ const schema = buildSchema(`
     name: String,
     snowboards: [Snowboard],
     location: String
+    logo: String
   }
 `)
 

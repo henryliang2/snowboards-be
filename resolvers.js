@@ -15,6 +15,7 @@ const manufacturer = async(name, db) => {
   return {
     name,
     location: snowboards[0].location,
+    logo: snowboards[0].logo,
     snowboards: snowboards,
   }
 }
