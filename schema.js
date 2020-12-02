@@ -2,9 +2,9 @@ const { buildSchema} = require('graphql');
 
 const schema = buildSchema(`
   type Query {
-    snowboard(name: String!): Snowboard,
-    manufacturer(name: String!): Manufacturer,
-    style(type: String!): [Snowboard],
+    snowboard(name: String): Snowboard,
+    manufacturer(name: String): Manufacturer,
+    snowboards(type: String, manufacturer: String): [Snowboard]
   }
 
   type Snowboard {

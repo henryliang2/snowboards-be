@@ -19,10 +19,17 @@ const manufacturer = async(name, db) => {
   }
 }
 
-const style = async(type, db) => {
+const snowboards = async(args, db) => {
+
+  let queryArguments;
+
+  if (args.type)         queryArguments = { style: args.type };
+  if (args.manufacturer) queryArguments = { manufacturer: args.manufacturer };
+
   const snowboards = await db('snowboards')
-    .where({ style: type })
+    .where(queryArguments)
     .catch((e) => { console.log(e)})
+
   console.log(snowboards);
   return snowboards;
 }
@@ -30,5 +37,5 @@ const style = async(type, db) => {
 module.exports = {
   snowboard,
   manufacturer,
-  style
+  snowboards
 }

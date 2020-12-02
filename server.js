@@ -25,7 +25,7 @@ const knex = require('knex')({
 const rootValue = {
   snowboard: async(args) => resolvers.snowboard(args.name, knex),
   manufacturer: async(args) => resolvers.manufacturer(args.name, knex),
-  style: async(args) => resolvers.style(args.type, knex)
+  snowboards: async(args) => resolvers.snowboards(args, knex),
 }
 
 // Middleware
