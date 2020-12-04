@@ -14,7 +14,8 @@ const schema = buildSchema(`
     style: String,
     directional: Boolean,
     wide: Boolean,
-    image: String
+    image: String,
+    description: String
   }
 
   type Manufacturer {
