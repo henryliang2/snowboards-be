@@ -33,7 +33,7 @@ const rootValue = {
 app.use('/graphql', graphqlHTTP({ 
   schema, 
   rootValue,
-  graphiql: process.env.ENVIRONMENT === 'development' ? true : false 
+  graphiql: true
 }))
 
 // Initialize Server
