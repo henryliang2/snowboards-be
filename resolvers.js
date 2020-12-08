@@ -1,7 +1,7 @@
 const manufacturer = async(name, db) => {
   const snowboards = await db('snowboards')
-    .join('manufacturers', {'snowboards.manufacturer': 'manufacturers.manufacturer_name'})
-    .where({ manufacturer: name })
+    .join('manufacturers', {'snowboards.manufacturer_id': 'manufacturers.id'})
+    .where({ manufacturer_name: name })
 
   return {
     name,
@@ -13,25 +13,34 @@ const manufacturer = async(name, db) => {
 
 const snowboard = async(name, db) => { 
   const response = await db('snowboards')
-    .join('manufacturers', {'snowboards.manufacturer': 'manufacturers.manufacturer_name'})
+    .join('manufacturers', {'snowboards.manufacturer_id': 'manufacturers.id'})
     .where({ name })
 
-  console.log(response[0])
+  const snowboard = {
+    ...response[0],
+    manufacturer: response[0].manufacturer_name
+  }
   
-  return response[0]
+  return snowboard
 }
 
 const snowboards = async(args, db) => {
 
   let queryArguments;
   if      (args.type)         queryArguments = { style: args.type };
-  else if (args.manufacturer) queryArguments = { manufacturer: args.manufacturer };
+  else if (args.manufacturer) queryArguments = { manufacturer_name: args.manufacturer };
   else return {};
 
   const snowboards = await db('snowboards')
+    .join('manufacturers', {'snowboards.manufacturer_id': 'manufacturers.id'})
     .where(queryArguments)
+    .then(snowboards => snowboards.map((snowboard) => ({
+        ...snowboard,
+        manufacturer: snowboard.manufacturer_name
+      })
+    ))
   
-  return snowboards;
+  return snowboards
 }
 
 module.exports = {
